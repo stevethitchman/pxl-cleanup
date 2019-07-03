@@ -74,6 +74,9 @@ class PXL_Cleanup {
 			add_filter('tiny_mce_plugins', [$this, 'disable_emojis_tinymce']);
 			add_filter('wp_resource_hints', [$this, 'disable_emojis_remove_dns_prefetch'], 10, 2);
 		}
+
+		/* revisions */
+        add_filter('wp_revisions_to_keep', [$this, 'wp_revisions_to_keep'], 10, 2);
 	}
 
 	function allow_svg($mimes)
@@ -192,6 +195,10 @@ class PXL_Cleanup {
 		return $urls;
 	}
 
+	function wp_revisions_to_keep($number, $post)
+    {
+        return 3;
+    }
 
 }
 
